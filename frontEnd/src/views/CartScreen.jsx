@@ -11,7 +11,7 @@ import {
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { addToCart, removeFromCart } from "../actions/cardActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 
 function CartScreen(props) {
   const { match, location, history } = props;
@@ -60,7 +60,7 @@ function CartScreen(props) {
                     <Col md={3}>
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>${item.price}</Col>
+                    <Col md={2}>₹{item.price}</Col>
                     <Col md={3}>
                       <Form.Control
                         as="select"
@@ -101,7 +101,7 @@ function CartScreen(props) {
                   Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   ) items
                 </h2>
-                $
+                ₹
                 {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}

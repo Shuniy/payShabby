@@ -17,7 +17,6 @@ function AppHeader(props) {
   return (
     <Navbar
       className="navbar"
-      bg="#3459E6"
       variant="dark"
       expand="lg"
       collapseOnSelect

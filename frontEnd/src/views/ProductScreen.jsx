@@ -61,9 +61,9 @@ function ProductScreen(props) {
                   color="#f8e825"
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+              <ListGroup.Item>Price : ₹{product.price}</ListGroup.Item>
               <ListGroup.Item>
-                Description : ${product.description}
+                Description : {product.description}
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -74,7 +74,7 @@ function ProductScreen(props) {
                   <Row>
                     <Col>Price</Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <strong>₹{product.price}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -112,7 +112,7 @@ function ProductScreen(props) {
 
                 <ListGroup.Item>
                   <Button
-                  onClick={addToCartHandler}
+                    onClick={addToCartHandler}
                     className="btn-block"
                     disabled={product.countInStock === 0}
                     type="button"
