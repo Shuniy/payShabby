@@ -17,7 +17,7 @@ function CartScreen(props) {
   const { match, location, history } = props;
 
   const productId = match.params.id;
-  const qty = location.search ? location.search.split("=")[1] : 1;
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
   const dispatch = useDispatch();
 
@@ -39,6 +39,12 @@ function CartScreen(props) {
     history.push("/login?redirect=shipping");
   };
 
+  // Create our number formatter.
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "INR",
+  });
+
   return (
     <div>
       <h1>Shopping Cart</h1>
@@ -46,7 +52,7 @@ function CartScreen(props) {
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
-            <Message variant="danger">
+            <Message variant="info">
               Your Cart is Empty <Link to="/">Go Back</Link>
             </Message>
           ) : (
@@ -60,7 +66,7 @@ function CartScreen(props) {
                     <Col md={3}>
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>₹{item.price}</Col>
+                    <Col md={2}>{formatter.format(item.price)}</Col>
                     <Col md={3}>
                       <Form.Control
                         as="select"
@@ -101,10 +107,10 @@ function CartScreen(props) {
                   Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   ) items
                 </h2>
-                ₹
-                {cartItems
+                
+                {formatter.format(cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
-                  .toFixed(2)}
+                  .toFixed(2))}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

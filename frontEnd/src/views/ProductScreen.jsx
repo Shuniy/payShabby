@@ -18,6 +18,11 @@ import { listProductDetails } from "../actions/productActions";
 function ProductScreen(props) {
   // match comes from react route
   const { match, history } = props;
+  // Create our number formatter.
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "INR",
+  });
 
   const [qty, setQty] = useState(1);
 
@@ -32,8 +37,8 @@ function ProductScreen(props) {
   }, [dispatch, match]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
-  }
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <div>
@@ -61,7 +66,7 @@ function ProductScreen(props) {
                   color="#f8e825"
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price : ₹{product.price}</ListGroup.Item>
+              <ListGroup.Item>Price : {formatter.format(product.price)}</ListGroup.Item>
               <ListGroup.Item>
                 Description : {product.description}
               </ListGroup.Item>
@@ -74,7 +79,7 @@ function ProductScreen(props) {
                   <Row>
                     <Col>Price</Col>
                     <Col>
-                      <strong>₹{product.price}</strong>
+                      <strong>{formatter.format(product.price)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -114,7 +119,7 @@ function ProductScreen(props) {
                   <Button
                     onClick={addToCartHandler}
                     className="btn-block"
-                    disabled={product.countInStock === 0}
+                    disabled={product.countInStock <= 0}
                     type="button"
                   >
                     Add To Cart

@@ -18,7 +18,7 @@ class Product(models.Model):
     image = models.ImageField(null=True, blank = True)
 
     def __str__(self):
-        return f"{self.name.title()}-{self.createdAt.strftime('%m/%d/%Y,%H:%M:%S')}"
+        return f"{self.id}-{self.name.title()}-{self.createdAt.strftime('%m/%d/%Y,%H:%M:%S')}"
 
 
 class Review(models.Model):
@@ -29,7 +29,7 @@ class Review(models.Model):
     comment = models.TextField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"{self.rating}-{self.name.title()}"
+        return f"{self.id}-{self.rating}-{self.name.title()}"
 
 
 class Order(models.Model):
@@ -49,7 +49,7 @@ class Order(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return f"{self.createdAt.strftime('%m/%d/%Y,%H:%M:%S')}"
+        return f"{self.id}-{self.createdAt.strftime('%m/%d/%Y,%H:%M:%S')}"
 
 
 class OrderItem(models.Model):
@@ -62,7 +62,7 @@ class OrderItem(models.Model):
     image = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"{self.name.title()}-{self.price}"
+        return f"{self.id}-{self.name.title()}-{self.price}"
 
 
 class ShippingAddress(models.Model):
@@ -76,4 +76,4 @@ class ShippingAddress(models.Model):
         max_digits=20, decimal_places=2, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.title()}'
+        return f'{self.id}-{self.city}-{self.postalCode}-{self.country}'.title()
