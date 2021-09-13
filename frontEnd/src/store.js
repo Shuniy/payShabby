@@ -11,7 +11,7 @@ import {
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
 
-import { orderCreateReducer, orderDetailsReducer } from './reducers/orderReducer'
+import { orderCreateReducer, orderDetailsReducer, orderListMyReducer, orderPayReducer } from './reducers/orderReducer'
 
 import thunk from "redux-thunk";
 import logger from "redux-logger";
@@ -27,6 +27,8 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   orderCreate:orderCreateReducer,
   orderDetails:orderDetailsReducer,
+  orderPay:orderPayReducer,
+  orderListMy:orderListMyReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
