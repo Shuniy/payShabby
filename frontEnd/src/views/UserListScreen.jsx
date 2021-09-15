@@ -38,7 +38,7 @@ function UserListScreen(props) {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>

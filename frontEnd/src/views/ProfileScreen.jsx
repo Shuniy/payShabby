@@ -71,7 +71,7 @@ function ProfileScreen(props) {
         <Col md={3}>
           <h2>User Profile</h2>
           {message && <Message variant="danger">{message}</Message>}
-          {error && <Message variant="danger">{error}</Message>}
+          {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
           {loading && <Loader />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="fname">

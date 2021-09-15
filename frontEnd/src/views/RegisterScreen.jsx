@@ -43,7 +43,7 @@ function RegisterScreen(props) {
     <FormContainer>
       <h1>Register Here</h1>
       {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant="danger">{error}</Message>}
+      {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="fname">
