@@ -8,7 +8,7 @@ from rest_framework import status
 from base.models import Product, Order, OrderItem, ShippingAddress
 from base.serializers import OrderSerializer
 
-from datetime import datetime
+from django.utils import timezone
 # views
 
 
@@ -65,6 +65,16 @@ def getMyOrders(request):
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+    user = request.user
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getOrderById(request, pk):
@@ -86,6 +96,16 @@ def getOrderById(request, pk):
 def updateOrderToPaid(request, pk):
     order = Order.objects.get(id=pk)
     order.isPaid = True
-    order.paidAt = datetime.now()
+    order.paidAt = timezone.now()
     order.save()
     return Response('Order was Paid')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateOrderToDelivered(request, pk):
+    order = Order.objects.get(id=pk)
+    order.isDelivered = True
+    order.deliveredAt = timezone.now()
+    order.save()
+    return Response('Order was Delivered')
