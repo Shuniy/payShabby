@@ -20,8 +20,8 @@ function UserListScreen(props) {
   const { success: successDelete } = userDelete;
 
   const deleteHandler = (id) => {
-    if(window.confirm('Are you sure you want to delete this user? '))
-    dispatch(deleteUser(id));
+    if (window.confirm("Are you sure you want to delete this user? "))
+      dispatch(deleteUser(id));
   };
 
   useEffect(() => {
@@ -38,7 +38,9 @@ function UserListScreen(props) {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
+        <Message variant="danger">
+          {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+        </Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>

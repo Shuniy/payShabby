@@ -48,7 +48,9 @@ function ProductScreen(props) {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
+        <Message variant="danger">
+          {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+        </Message>
       ) : (
         <Row>
           <Col md={6}>
@@ -66,7 +68,9 @@ function ProductScreen(props) {
                   color="#f8e825"
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price : {formatter.format(product.price)}</ListGroup.Item>
+              <ListGroup.Item>
+                Price : {formatter.format(product.price)}
+              </ListGroup.Item>
               <ListGroup.Item>
                 Description : {product.description}
               </ListGroup.Item>

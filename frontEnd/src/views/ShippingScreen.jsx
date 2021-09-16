@@ -3,14 +3,14 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../actions/cartActions";
-import CheckoutSteps from '../components/CheckoutSteps'
+import CheckoutSteps from "../components/CheckoutSteps";
 
 function ShippingScreen(props) {
   const { location, history } = props;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart)
-  const {shippingAddress} = cart
+  const cart = useSelector((state) => state.cart);
+  const { shippingAddress } = cart;
 
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
@@ -18,11 +18,16 @@ function ShippingScreen(props) {
   const [country, setCountry] = useState(shippingAddress.country);
 
   const submitHandler = (e) => {
-      e.preventDefault()
-      dispatch(saveShippingAddress({
-          address, city, postalCode, country
-      }))
-      history.push('/payment')
+    e.preventDefault();
+    dispatch(
+      saveShippingAddress({
+        address,
+        city,
+        postalCode,
+        country,
+      })
+    );
+    history.push("/payment");
   };
 
   return (

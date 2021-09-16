@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import Loader from "../components/Loader";
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
@@ -29,7 +29,7 @@ function ProfileScreen(props) {
   const { success } = userUpdateProfile;
 
   const orderListMy = useSelector((state) => state.orderListMy);
-  const { loading:loadingOrders, error:errorOrders, orders } = orderListMy;
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
   useEffect(() => {
     if (!userInfo) {
@@ -71,7 +71,11 @@ function ProfileScreen(props) {
         <Col md={3}>
           <h2>User Profile</h2>
           {message && <Message variant="danger">{message}</Message>}
-          {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
+          {error && (
+            <Message variant="danger">
+              {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+            </Message>
+          )}
           {loading && <Loader />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="fname">
@@ -152,16 +156,23 @@ function ProfileScreen(props) {
                 {orders.map((order) => (
                   <tr key={order.id}>
                     <td>{order.id}</td>
-                    <td>
-                      {order.createdAt.substring(0, 10)}
-                    </td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
                     <td>{order.totalPrice}</td>
-                    <td>{order.isPaid ? order.paidAt : (
-                      <i className='fas fa-times' style={{color:'red'}}></i>
-                    )}</td>
-                    <td><LinkContainer to={`/order/${order.id}`}>
-                        <Button className='btn btn-md'>Details</Button>
-                    </LinkContainer></td>
+                    <td>
+                      {order.isPaid ? (
+                        order.paidAt
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      <LinkContainer to={`/order/${order.id}`}>
+                        <Button className="btn btn-md">Details</Button>
+                      </LinkContainer>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -10,12 +10,12 @@ class Product(models.Model):
     brand = models.CharField(max_length=200, null=True, blank=True)
     category = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    rating = models.DecimalField(max_digits=7, decimal_places=2)
+    rating = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=21, decimal_places=2, default=0)
-    image = models.ImageField(null=True, blank = True)
+    image = models.ImageField(null=True, blank = True, default = '/placeholder.png')
 
     def __str__(self):
         return f"{self.id}-{self.name.title()}-{self.createdAt.strftime('%m/%d/%Y,%H:%M:%S')}"

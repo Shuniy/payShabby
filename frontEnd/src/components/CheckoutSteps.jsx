@@ -3,7 +3,7 @@ import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 function CheckoutSteps(props) {
-    const {step1, step2, step3, step4} = props;
+  const { step1, step2, step3, step4 } = props;
   return (
     <Nav className="justify-content-center mb-4">
       <Nav.Item>

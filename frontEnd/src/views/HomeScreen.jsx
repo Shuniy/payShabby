@@ -16,7 +16,7 @@ function HomeScreen(props) {
     dispatch(listProducts());
   }, [dispatch]);
 
-  console.log(productList)
+  console.log(productList);
 
   return (
     <div>
@@ -25,7 +25,9 @@ function HomeScreen(props) {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
+        <Message variant="danger">
+          {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+        </Message>
       ) : (
         <Row>
           {products.map((product) => (

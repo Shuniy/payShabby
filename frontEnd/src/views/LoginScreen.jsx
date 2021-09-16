@@ -34,7 +34,11 @@ function LoginScreen(props) {
     <FormContainer>
       <h1>Sign In</h1>
 
-      {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
+      {error && (
+        <Message variant="danger">
+          {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+        </Message>
+      )}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">

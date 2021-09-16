@@ -151,7 +151,11 @@ function PlaceOrderScreen(props) {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
+                {error && (
+                  <Message variant="danger">
+                    {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+                  </Message>
+                )}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

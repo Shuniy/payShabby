@@ -293,7 +293,11 @@ export const updateUser = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`/api/users/update/${user.id}/`, user, config);
+    const { data } = await axios.put(
+      `/api/users/update/${user.id}/`,
+      user,
+      config
+    );
 
     dispatch({
       type: USER_UPDATE_SUCCESS,
@@ -304,7 +308,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
       type: USER_DETAILS_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,

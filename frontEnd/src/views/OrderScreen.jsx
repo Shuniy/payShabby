@@ -71,7 +71,9 @@ function OrderScreen(props) {
   return loading ? (
     <Loader />
   ) : error ? (
-    <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
+    <Message variant="danger">
+      {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+    </Message>
   ) : (
     <div>
       <h1>Order : {order.id}</h1>
@@ -183,7 +185,11 @@ function OrderScreen(props) {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
+                {error && (
+                  <Message variant="danger">
+                    {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+                  </Message>
+                )}
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>

@@ -4,7 +4,12 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../actions/productActions";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 function ProductListScreen(props) {
   const { history, match } = props;
@@ -13,25 +18,53 @@ function ProductListScreen(props) {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this product? ")) {
     }
-    //   dispatch(deleteUser(id));
+    dispatch(deleteProduct(id));
   };
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+
+    if (!userInfo.isAdmin) {
       history.push(`/login`);
     }
-  }, [dispatch, history, userInfo]);
+
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct.id}/edit/`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ]);
 
   const createProductHandler = (product) => {
-    // create Product
+    dispatch(createProduct());
   };
 
   return (
@@ -46,6 +79,14 @@ function ProductListScreen(props) {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && (
+        <Message variant="danger">{errorDelete}! Try Logging In Again!</Message>
+      )}
+      {loadingCreate && <Loader />}
+      {errorCreate && (
+        <Message variant="danger">{errorCreate}! Try Logging In Again!</Message>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (

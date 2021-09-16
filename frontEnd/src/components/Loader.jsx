@@ -11,12 +11,12 @@ function Loader(props) {
         width: "100px",
         margin: "auto",
         display: "block",
-        textAlign:'center', 
-        alignItems:'center', 
-        justifyContent:'center',
+        textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-        <span className='sr-only'>Loading...</span>
+      <span className="sr-only">Loading...</span>
     </Spinner>
   );
 }

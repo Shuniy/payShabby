@@ -42,8 +42,12 @@ function RegisterScreen(props) {
   return (
     <FormContainer>
       <h1>Register Here</h1>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>}
+      {message && <Message variant="danger">{message}</Message>}
+      {error && (
+        <Message variant="danger">
+          {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+        </Message>
+      )}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="fname">
@@ -106,7 +110,7 @@ function RegisterScreen(props) {
 
       <Row className="py-3">
         <Col>
-          Have an account?{" "} 
+          Have an account?{" "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
             Sign In
           </Link>

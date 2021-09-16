@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUser } from "../actions/userActions";
-import { USER_UPDATE_RESET } from '../constants/userConstants'
+import { USER_UPDATE_RESET } from "../constants/userConstants";
 
 function UserEditScreen(props) {
   const { history, match } = props;
@@ -24,28 +24,39 @@ function UserEditScreen(props) {
   const { error, loading, user } = userDetails;
 
   const userUpdate = useSelector((state) => state.userUpdate);
-  const { error:errorUpdate, loading:loadingUpdate, success:successUpdate } = userUpdate;
+  const {
+    error: errorUpdate,
+    loading: loadingUpdate,
+    success: successUpdate,
+  } = userUpdate;
 
   useEffect(() => {
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push(`/admin/userlist`);
+    }
 
-      if(successUpdate){
-        dispatch({type:USER_UPDATE_RESET})
-        history.push(`/admin/userlist`)
-      }
-
-      if (!user || user.id !== Number(userId)){
-          dispatch(getUserDetails(userId))
-      }else{
-          setFname(user.first_name)
-          setLname(user.last_name)
-          setEmail(user.email);
-          setIsAdmin(user.isAdmin);
-      }
+    if (!user || user.id !== Number(userId)) {
+      dispatch(getUserDetails(userId));
+    } else {
+      setFname(user.first_name);
+      setLname(user.last_name);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
+    }
   }, [userId, dispatch, user, successUpdate, history]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(updateUser({id:user.id, first_name:fname, last_name:lname, email, isAdmin}))
+    dispatch(
+      updateUser({
+        id: user.id,
+        first_name: fname,
+        last_name: lname,
+        email,
+        isAdmin,
+      })
+    );
   };
 
   return (
@@ -54,14 +65,16 @@ function UserEditScreen(props) {
         Go Back
       </Link>
       {loadingUpdate && <Loader />}
-      {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+      {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       <FormContainer>
         <h1>Edit User</h1>
 
         {loading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger">{error}! Try Reloading, If error persist, LOGIN AGAIN !!!</Message>
+          <Message variant="danger">
+            {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+          </Message>
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="fname">
