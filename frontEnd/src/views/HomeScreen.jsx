@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import ProductCarousel from "../components/ProductCarousel";
 import Paginate from "../components/Paginate";
 
 function HomeScreen(props) {
@@ -22,6 +23,7 @@ function HomeScreen(props) {
 
   return (
     <div>
+      {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
 
       {loading ? (
@@ -39,7 +41,7 @@ function HomeScreen(props) {
               </Col>
             ))}
           </Row>
-          <Paginate page={page} pages = {pages} keyword={keyword} />
+          <Paginate page={page} pages={pages} keyword={keyword} />
         </div>
       )}
     </div>

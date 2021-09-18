@@ -20,20 +20,45 @@ import {
   PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_RESET,
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_SUCCESS,
+  PRODUCT_TOP_FAIL,
 } from "../constants/productConstants";
 import axios from "axios";
 
-export const listProducts = (keyword = '') => async (dispatch) => {
+export const listProducts =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
+      const { data } = await axios.get(`/api/products${keyword}`);
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.messsage,
+        // error.message,
+      });
+    }
+  };
+
+export const listTopProducts = () => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get(`/api/products${keyword}`);
+    dispatch({ type: PRODUCT_TOP_REQUEST });
+    const { data } = await axios.get(`/api/products/top/`);
     dispatch({
-      type: PRODUCT_LIST_SUCCESS,
+      type: PRODUCT_TOP_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: PRODUCT_LIST_FAIL,
+      type: PRODUCT_TOP_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -173,44 +198,44 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 };
 
-export const createProductReview = (productId, review) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: PRODUCT_CREATE_REVIEW_REQUEST,
-    });
+export const createProductReview =
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_REQUEST,
+      });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    console.log("got user info");
+      console.log("got user info");
 
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.post(
-      `/api/products/${productId}/reviews/`,
-      review,
-      config
-    );
+      const { data } = await axios.post(
+        `/api/products/${productId}/reviews/`,
+        review,
+        config
+      );
 
-    dispatch({
-      type: PRODUCT_CREATE_REVIEW_SUCCESS,
-      payload: data,
-    });
-
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_CREATE_REVIEW_FAIL,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.messsage,
-      // error.message,
-    });
-  }
-};
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.messsage,
+        // error.message,
+      });
+    }
+  };
