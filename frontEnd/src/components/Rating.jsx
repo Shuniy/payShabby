@@ -56,7 +56,7 @@ function Rating(props) {
           style={{ color }}
         ></i>
       </span>
-      <span>{text && text} reviews</span>
+      <span>{text && text} Reviews</span>
     </div>
   );
 }

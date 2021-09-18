@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import { formatPrice } from "../utils/helpers";
 
 function CartScreen(props) {
   const { match, location, history } = props;
@@ -39,12 +40,6 @@ function CartScreen(props) {
     history.push("/login?redirect=shipping");
   };
 
-  // Create our number formatter.
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "INR",
-  });
-
   return (
     <div>
       <h1>Shopping Cart</h1>
@@ -66,7 +61,7 @@ function CartScreen(props) {
                     <Col md={3}>
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>{formatter.format(item.price)}</Col>
+                    <Col md={2}>{formatPrice(item.price)}</Col>
                     <Col md={3}>
                       <Form.Control
                         as="select"
@@ -108,7 +103,7 @@ function CartScreen(props) {
                   ) items
                 </h2>
 
-                {formatter.format(
+                {formatPrice(
                   cartItems
                     .reduce((acc, item) => acc + item.qty * item.price, 0)
                     .toFixed(2)

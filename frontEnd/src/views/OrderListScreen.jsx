@@ -5,6 +5,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { listOrders } from "../actions/orderActions";
+import { formatDate } from '../utils/helpers'
 
 function OrderListScreen(props) {
   const { history } = props;
@@ -51,12 +52,12 @@ function OrderListScreen(props) {
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
+                <td>{formatDate(order.createdAt)}</td>
                 <td>{order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
                     <i className="fas fa-check" style={{ color: "green" }}>
-                      {order.paidAt.substring(0, 10)}
+                      {formatDate(order.paidAt)}
                     </i>
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
@@ -65,7 +66,7 @@ function OrderListScreen(props) {
                 <td>
                   {order.isDelivered ? (
                     <i className="fas fa-check" style={{ color: "green" }}>
-                      {order.deliveredAt.substring(0, 10)}
+                      {formatDate(order.deliveredAt)}
                     </i>
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>

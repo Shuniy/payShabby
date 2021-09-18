@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Message from "../components/Message";
 import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { formatPrice } from "../utils/helpers";
 
 function PlaceOrderScreen(props) {
   const { history } = props;
@@ -39,12 +40,6 @@ function PlaceOrderScreen(props) {
       type: ORDER_CREATE_RESET,
     });
   }, [success, history, dispatch, order]);
-
-  // Create our number formatter.
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "INR",
-  });
 
   const placeOrder = () => {
     dispatch(
@@ -109,8 +104,8 @@ function PlaceOrderScreen(props) {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} X {formatter.format(item.price)} =
-                          {formatter.format((item.qty * item.price).toFixed(2))}
+                          {item.qty} X {formatPrice(item.price)} =
+                          {formatPrice((item.qty * item.price).toFixed(2))}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -129,25 +124,25 @@ function PlaceOrderScreen(props) {
               <ListGroup.Item>
                 <Row>
                   <Col>Item :</Col>
-                  <Col>{formatter.format(cart.itemsPrice)}</Col>
+                  <Col>{formatPrice(cart.itemsPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping :</Col>
-                  <Col>{formatter.format(cart.shippingPrice)}</Col>
+                  <Col>{formatPrice(cart.shippingPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax :</Col>
-                  <Col>{formatter.format(cart.taxPrice)}</Col>
+                  <Col>{formatPrice(cart.taxPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total Price :</Col>
-                  <Col>{formatter.format(cart.totalPrice)}</Col>
+                  <Col>{formatPrice(cart.totalPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

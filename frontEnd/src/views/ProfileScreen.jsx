@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import { listMyOrders } from "../actions/orderActions";
+import { formatDate } from "../utils/helpers";
 
 function ProfileScreen(props) {
   const { location, history } = props;
@@ -156,7 +157,7 @@ function ProfileScreen(props) {
                 {orders.map((order) => (
                   <tr key={order.id}>
                     <td>{order.id}</td>
-                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>{formatDate(order.createdAt)}</td>
                     <td>{order.totalPrice}</td>
                     <td>
                       {order.isPaid ? (

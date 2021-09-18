@@ -2,13 +2,10 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import Rating from "./Rating";
 import { Link } from "react-router-dom";
+import { formatPrice } from '../utils/helpers'
 
 function Product(props) {
-  // Create our number formatter.
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "INR",
-  });
+  
   const { product } = props;
   return (
     <Card className="py-3 p-3 rounded">
@@ -31,7 +28,7 @@ function Product(props) {
             />
           </div>
         </Card.Text>
-        <Card.Text as="h3">{formatter.format(product.price)}</Card.Text>
+        <Card.Text as="h3">{formatPrice(product.price)}</Card.Text>
       </Card.Body>
     </Card>
   );

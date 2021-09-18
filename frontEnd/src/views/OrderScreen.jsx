@@ -14,6 +14,7 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
+import { formatPrice } from "../utils/helpers";
 
 import { clientId } from "../private";
 
@@ -90,12 +91,6 @@ function OrderScreen(props) {
     dispatch(deliverOrder(order));
   };
 
-  // Create our number formatter.
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "INR",
-  });
-
   return loading ? (
     <Loader />
   ) : error ? (
@@ -171,8 +166,8 @@ function OrderScreen(props) {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} X {formatter.format(item.price)} =
-                          {formatter.format((item.qty * item.price).toFixed(2))}
+                          {item.qty} X {formatPrice(item.price)} =
+                          {formatPrice((item.qty * item.price).toFixed(2))}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -191,25 +186,25 @@ function OrderScreen(props) {
               <ListGroup.Item>
                 <Row>
                   <Col>Item :</Col>
-                  <Col>{formatter.format(order.itemsPrice)}</Col>
+                  <Col>{formatPrice(order.itemsPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping :</Col>
-                  <Col>{formatter.format(order.shippingPrice)}</Col>
+                  <Col>{formatPrice(order.shippingPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax :</Col>
-                  <Col>{formatter.format(order.taxPrice)}</Col>
+                  <Col>{formatPrice(order.taxPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total Price :</Col>
-                  <Col>{formatter.format(order.totalPrice)}</Col>
+                  <Col>{formatPrice(order.totalPrice)}</Col>
                 </Row>
               </ListGroup.Item>
                 {error && (

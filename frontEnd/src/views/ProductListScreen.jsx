@@ -11,12 +11,14 @@ import {
 } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
+import Paginate from "../components/Paginate";
+
 function ProductListScreen(props) {
   const { history, match } = props;
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages, page } = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
@@ -42,6 +44,8 @@ function ProductListScreen(props) {
     dispatch(deleteProduct(id));
   };
 
+  let keyword = history.location.search;
+
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
 
@@ -52,7 +56,7 @@ function ProductListScreen(props) {
     if (successCreate) {
       history.push(`/admin/product/${createdProduct.id}/edit/`);
     } else {
-      dispatch(listProducts());
+      dispatch(listProducts(keyword));
     }
   }, [
     dispatch,
@@ -61,6 +65,7 @@ function ProductListScreen(props) {
     successDelete,
     successCreate,
     createdProduct,
+    keyword,
   ]);
 
   const createProductHandler = (product) => {
@@ -94,44 +99,47 @@ function ProductListScreen(props) {
           {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
         </Message>
       ) : (
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>₹{product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-
-                <td>
-                  <LinkContainer to={`/admin/product/${product.id}/edit/`}>
-                    <Button variant="light" className="btn btn-sm">
-                      <i className="fa fa-edit"></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn btn-sm"
-                    onClick={() => deleteHandler(product.id)}
-                  >
-                    <i className="fa fa-trash"></i>
-                  </Button>
-                </td>
+        <div>
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.id}</td>
+                  <td>{product.name}</td>
+                  <td>₹{product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+
+                  <td>
+                    <LinkContainer to={`/admin/product/${product.id}/edit/`}>
+                      <Button variant="light" className="btn btn-sm">
+                        <i className="fa fa-edit"></i>
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant="danger"
+                      className="btn btn-sm"
+                      onClick={() => deleteHandler(product.id)}
+                    >
+                      <i className="fa fa-trash"></i>
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <Paginate page={page} pages={pages} isAdmin={true} />
+        </div>
       )}
     </div>
   );
