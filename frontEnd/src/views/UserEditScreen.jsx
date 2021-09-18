@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
@@ -60,7 +60,7 @@ function UserEditScreen(props) {
   };
 
   return (
-    <div>
+    <div className="my-3">
       <Link className="btn btn-primary" to={`/admin/userlist`}>
         Go Back
       </Link>
@@ -77,7 +77,7 @@ function UserEditScreen(props) {
           </Message>
         ) : (
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId="fname">
+            <Form.Group className="my-3" controlId="fname">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
@@ -87,7 +87,7 @@ function UserEditScreen(props) {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="lname">
+            <Form.Group className="my-3" controlId="lname">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
@@ -96,7 +96,7 @@ function UserEditScreen(props) {
                 onChange={(event) => setLname(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="email">
+            <Form.Group className="my-3" controlId="email">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
@@ -106,14 +106,17 @@ function UserEditScreen(props) {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="isAdmin">
-              <Form.Check
-                type="checkbox"
-                placeholder="Is Admin"
-                checked={isAdmin}
-                onChange={(event) => setIsAdmin(event.target.checked)}
-              ></Form.Check>
+            <Form.Group className="my-3" controlId="isAdmin">
+              <div style={{display:'flex'}}>
               <Form.Label>Is Admin</Form.Label>
+                <Form.Check
+                  type="checkbox"
+                  placeholder="Is Admin"
+                  className='mx-3'
+                  checked={isAdmin}
+                  onChange={(event) => setIsAdmin(event.target.checked)}
+                ></Form.Check>
+              </div>
             </Form.Group>
 
             <Button type="submit" variant="primary">

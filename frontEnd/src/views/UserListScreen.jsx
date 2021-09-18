@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
@@ -33,7 +33,7 @@ function UserListScreen(props) {
   }, [dispatch, history, userInfo, successDelete]);
 
   return (
-    <div>
+    <div className='my-3'>
       <h1>Users</h1>
       {loading ? (
         <Loader />
@@ -67,13 +67,13 @@ function UserListScreen(props) {
                 </td>
                 <td>
                   <LinkContainer to={`/admin/user/${user.id}/edit/`}>
-                    <Button variant="light" className="btn btn-sm">
+                    <Button variant="light" className="btn btn-sm mx-3">
                       <i className="fa fa-edit"></i>
                     </Button>
                   </LinkContainer>
                   <Button
                     variant="danger"
-                    className="btn btn-sm"
+                    className="btn btn-sm mx-3"
                     onClick={() => deleteHandler(user.id)}
                   >
                     <i className="fa fa-trash"></i>

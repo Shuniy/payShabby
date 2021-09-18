@@ -10,7 +10,7 @@ import { listMyOrders } from "../actions/orderActions";
 import { formatDate } from "../utils/helpers";
 
 function ProfileScreen(props) {
-  const { location, history } = props;
+  const { history } = props;
   const dispatch = useDispatch();
 
   const [fname, setFname] = useState("");
@@ -68,7 +68,7 @@ function ProfileScreen(props) {
   };
   return (
     <div>
-      <Row>
+      <Row className="my-3">
         <Col md={3}>
           <h2>User Profile</h2>
           {message && <Message variant="danger">{message}</Message>}
@@ -79,7 +79,7 @@ function ProfileScreen(props) {
           )}
           {loading && <Loader />}
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId="fname">
+            <Form.Group className="my-3" controlId="fname">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
@@ -90,7 +90,7 @@ function ProfileScreen(props) {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="lname">
+            <Form.Group className="my-3" controlId="lname">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
@@ -99,7 +99,7 @@ function ProfileScreen(props) {
                 onChange={(event) => setLname(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="email">
+            <Form.Group className="my-3" controlId="email">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
@@ -110,7 +110,7 @@ function ProfileScreen(props) {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="password">
+            <Form.Group className="my-3" controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -120,7 +120,7 @@ function ProfileScreen(props) {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="passwordConfirm">
+            <Form.Group className="my-3" controlId="passwordConfirm">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
@@ -142,7 +142,7 @@ function ProfileScreen(props) {
           ) : errorOrders ? (
             <Message variant="danger">{errorOrders}</Message>
           ) : (
-            <Table striped responsive className="table-sm">
+            <Table striped responsive className="table-sm my-3">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -161,7 +161,9 @@ function ProfileScreen(props) {
                     <td>{order.totalPrice}</td>
                     <td>
                       {order.isPaid ? (
-                        order.paidAt
+                        <i className="fas fa-check" style={{ color: "green" }}>
+                          {"  "}{order.paidAt}
+                        </i>
                       ) : (
                         <i
                           className="fas fa-times"

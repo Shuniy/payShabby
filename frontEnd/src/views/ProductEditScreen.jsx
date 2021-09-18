@@ -112,13 +112,13 @@ function ProductEditScreen(props) {
   };
 
   return (
-    <div>
+    <div className="my-3">
       <Link className="btn btn-primary" to={`/admin/productlist`}>
         Go Back
       </Link>
       {loadingUpdate && <Loader />}
       {errorUpdate && (
-        <Message variant="danger">
+        <Message className="my-3" variant="danger">
           {errorUpdate}!, Try Logging In Again !!!
         </Message>
       )}
@@ -133,7 +133,7 @@ function ProductEditScreen(props) {
           </Message>
         ) : (
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId="name">
+            <Form.Group className="my-3" controlId="name">
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
@@ -142,7 +142,7 @@ function ProductEditScreen(props) {
                 onChange={(event) => setName(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="price">
+            <Form.Group className="my-3" controlId="price">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type="number"
@@ -151,10 +151,11 @@ function ProductEditScreen(props) {
                 onChange={(event) => setPrice(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="image">
+            <Form.Group className="my-3" controlId="image">
               <Form.Label>Product Image</Form.Label>
               <Form.Control
                 type="text"
+                className="my-3"
                 placeholder="Enter Product Image"
                 value={image}
                 onChange={(event) => setImage(event.target.value)}
@@ -167,7 +168,7 @@ function ProductEditScreen(props) {
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
-            <Form.Group controlId="brand">
+            <Form.Group className="my-3" controlId="brand">
               <Form.Label>Product Brand</Form.Label>
               <Form.Control
                 type="text"
@@ -176,7 +177,7 @@ function ProductEditScreen(props) {
                 onChange={(event) => setBrand(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="countInStock">
+            <Form.Group className="my-3" controlId="countInStock">
               <Form.Label>Stock</Form.Label>
               <Form.Control
                 type="number"
@@ -185,7 +186,7 @@ function ProductEditScreen(props) {
                 onChange={(event) => setCountInStock(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="category">
+            <Form.Group className="my-3" controlId="category">
               <Form.Label>Product Category</Form.Label>
               <Form.Control
                 type="text"
@@ -194,7 +195,7 @@ function ProductEditScreen(props) {
                 onChange={(event) => setCategory(event.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="description">
+            <Form.Group className="my-3" controlId="description">
               <Form.Label>Product Description</Form.Label>
               <Form.Control
                 as="textarea"

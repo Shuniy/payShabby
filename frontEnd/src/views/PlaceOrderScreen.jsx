@@ -58,18 +58,20 @@ function PlaceOrderScreen(props) {
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
-      <Row>
+      <Row className="my-3">
         <Col md={8}>
-          <ListGroup variant="flush">
+          <ListGroup variant="">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>
-                  Shipping : {"  "} {cart.shippingAddress.address}, {"  "}
-                  {cart.shippingAddress.city}, {"  "}
-                  {cart.shippingAddress.postalCode},{"  "}
-                  {cart.shippingAddress.country}
-                </strong>
+                <em>
+                  <strong>
+                    Shipping : {"  "} {cart.shippingAddress.address}, {"  "}
+                    {cart.shippingAddress.city}, {"  "}
+                    {cart.shippingAddress.postalCode},{"  "}
+                    {cart.shippingAddress.country}
+                  </strong>
+                </em>
               </p>
             </ListGroup.Item>
             <ListGroup.Item>
@@ -145,13 +147,11 @@ function PlaceOrderScreen(props) {
                   <Col>{formatPrice(cart.totalPrice)}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
                 {error && (
                   <Message variant="danger">
                     {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
                   </Message>
                 )}
-              </ListGroup.Item>
               <ListGroup.Item>
                 <Button
                   type="button"

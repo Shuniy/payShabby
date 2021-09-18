@@ -42,15 +42,19 @@ function RegisterScreen(props) {
   return (
     <FormContainer>
       <h1>Register Here</h1>
-      {message && <Message variant="danger">{message}</Message>}
+      {message && (
+        <Message className="my-3" variant="danger">
+          {message}
+        </Message>
+      )}
       {error && (
-        <Message variant="danger">
+        <Message className="my-3" variant="danger">
           {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
         </Message>
       )}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="fname">
+        <Form.Group className="my-3" controlId="fname">
           <Form.Label>First Name</Form.Label>
           <Form.Control
             type="text"
@@ -61,7 +65,7 @@ function RegisterScreen(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="lname">
+        <Form.Group className="my-3" controlId="lname">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
             type="text"
@@ -70,7 +74,7 @@ function RegisterScreen(props) {
             onChange={(event) => setLname(event.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId="email">
+        <Form.Group className="my-3" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -81,7 +85,7 @@ function RegisterScreen(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group className="my-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
@@ -92,7 +96,7 @@ function RegisterScreen(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="passwordConfirm">
+        <Form.Group className="my-3" controlId="passwordConfirm">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             required
@@ -108,7 +112,7 @@ function RegisterScreen(props) {
         </Button>
       </Form>
 
-      <Row className="py-3">
+      <Row className="py-3 my-3">
         <Col>
           Have an account?{" "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>

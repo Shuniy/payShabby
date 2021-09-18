@@ -3,7 +3,7 @@ import React from "react";
 function Rating(props) {
   const { value, text, color } = props;
   return (
-    <div className="rating">
+    <div className="rating my-1">
       <span>
         <i
           className={

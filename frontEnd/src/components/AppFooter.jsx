@@ -4,7 +4,7 @@ import { Container, Col, Row } from "react-bootstrap";
 function AppFooter(props) {
   return (
     <div>
-      <footer>
+      <footer style={{margin:"5px 0"}}>
         <Container>
           <Row>
             <Col className="text-center py-5">

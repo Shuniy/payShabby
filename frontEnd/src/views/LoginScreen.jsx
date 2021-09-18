@@ -35,13 +35,13 @@ function LoginScreen(props) {
       <h1>Sign In</h1>
 
       {error && (
-        <Message variant="danger">
+        <Message className="my-3" variant="danger">
           {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
         </Message>
       )}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="email">
+        <Form.Group className="my-3" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -52,7 +52,7 @@ function LoginScreen(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group className="my-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -68,7 +68,7 @@ function LoginScreen(props) {
         </Button>
       </Form>
 
-      <Row className="py-3">
+      <Row className="py-3 my-3">
         <Col>
           New Customer?{" "}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>

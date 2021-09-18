@@ -41,30 +41,33 @@ function CartScreen(props) {
   };
 
   return (
-    <div>
-      <h1>Shopping Cart</h1>
+    <div className="my-3">
+      <h1 className="my-3">Shopping Cart</h1>
 
       <Row>
-        <Col md={8}>
+        <Col className="my-3" md={8}>
           {cartItems.length === 0 ? (
-            <Message variant="info">
+            <Message className="my-3" variant="info">
               Your Cart is Empty <Link to="/">Go Back</Link>
             </Message>
           ) : (
-            <ListGroup variant="flush">
+            <ListGroup variant="">
               {cartItems.map((item) => (
-                <ListGroup.Item key={item.product}>
-                  <Row>
+                <ListGroup.Item className="my-auto" key={item.product}>
+                  <Row className="my-3" style={{ textAlign: "center" }}>
                     <Col md={2}>
-                      <Image src={item.image} fluid rounded />
+                      <Image className="my-3" src={item.image} fluid rounded />
                     </Col>
-                    <Col md={3}>
+                    <Col md={3} className="my-3">
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>{formatPrice(item.price)}</Col>
-                    <Col md={3}>
+                    <Col md={3} className="my-3">
+                      {formatPrice(item.price)}
+                    </Col>
+                    <Col md={2}>
                       <Form.Control
                         as="select"
+                        className="my-3"
                         value={item.qty}
                         onChange={(e) =>
                           dispatch(
@@ -79,9 +82,10 @@ function CartScreen(props) {
                         ))}
                       </Form.Control>
                     </Col>
-                    <Col md={1}>
+                    <Col md={2}>
                       <Button
                         type="button"
+                        className="my-3"
                         variant="light"
                         onClick={() => removeFromCartHandler(item.product)}
                       >
@@ -94,9 +98,9 @@ function CartScreen(props) {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}>
+        <Col className="my-3" md={4}>
           <Card>
-            <ListGroup variant="flush">
+            <ListGroup variant="">
               <ListGroup.Item>
                 <h2>
                   Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}

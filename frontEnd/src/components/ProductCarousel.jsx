@@ -22,14 +22,14 @@ function ProductCarousel(props) {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <Carousel pause="hover" className="bg-dark">
+    <Carousel pause="hover" className="bg-dark" style={{borderRadius:10}}>
       {products.map((product) => (
         <Carousel.Item key={product.id}>
           <Link to={`/product/${product.id}/`}>
             <Image src={product.image} alt={product.name} />
             <Carousel.Caption className="carousel-caption">
               <h4>
-                {product.name} {formatPrice(product.price)}{" "}
+                {product.name} at {formatPrice(product.price)}{" "}
               </h4>
             </Carousel.Caption>
           </Link>

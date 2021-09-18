@@ -78,17 +78,17 @@ function ProductScreen(props) {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">
+        <Message className="my-3" variant="danger">
           {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
         </Message>
       ) : (
         <div>
           <Row>
-            <Col md={6}>
+            <Col md={5} className="my-3">
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={3}>
-              <ListGroup variant="flush">
+            <Col md={4} className="my-3">
+              <ListGroup variant="">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
@@ -100,16 +100,16 @@ function ProductScreen(props) {
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Price : {formatPrice(product.price)}
+                  <strong>Price</strong> : {formatPrice(product.price)}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Description : {product.description}
+                  <strong>Description</strong> : {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={3}>
+            <Col md={3} className="my-3">
               <Card>
-                <ListGroup variant="flush">
+                <ListGroup variant="">
                   <ListGroup.Item>
                     <Row>
                       <Col>Price</Col>
@@ -169,39 +169,48 @@ function ProductScreen(props) {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="my-3">
             <Col md={6}>
-              <h4>Reviews</h4>
+              <h4 className="my-3">Reviews</h4>
               {product.reviews.length === 0 && (
-                <Message variant="info">No Reviews</Message>
+                <Message className="my-3" variant="info">
+                  No Reviews
+                </Message>
               )}
 
-              <ListGroup variant="flush">
+              <ListGroup variant="">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review.id}>
-                    <strong>{review.name}</strong>
+                    <strong style={{ fontSize: 21, padding: "10px 0" }}>
+                      {review.name}
+                    </strong>
                     <Rating value={review.rating} color="#f8e825" />
                     <em>
                       <p>{formatDate(review.createdAt)}</p>
                     </em>
-                    <p>{review.comment}</p>
+                    <p className="my-3">{review.comment}</p>
                   </ListGroup.Item>
                 ))}
 
                 <ListGroup.Item>
-                  <h4>Write a Review</h4>
+                  <h4 className="my-3">Write a Review</h4>
                   {loadingProductReview && <Loader />}
                   {successProductReview && (
-                    <Message variant="success">Review Submitted</Message>
+                    <Message className="my-3" variant="success">
+                      Review Submitted
+                    </Message>
                   )}
                   {errorProductReview && (
-                    <Message variant="danger">{errorProductReview}</Message>
+                    <Message className="my-3" variant="danger">
+                      {errorProductReview}
+                    </Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="rating">
                         <Form.Label>Rating</Form.Label>
                         <Form.Control
+                          className="my-2"
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
@@ -218,13 +227,15 @@ function ProductScreen(props) {
                         <Form.Label>Comment</Form.Label>
                         <Form.Control
                           as="textarea"
+                          className="my-2"
                           rows={5}
                           value={comment}
-                          onChange={(e) =>setComment( e.target.value)}
+                          onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </FormGroup>
                       <Button
                         type="submit"
+                        className="my-2"
                         disabled={loadingProductReview}
                         variant="primary"
                       >

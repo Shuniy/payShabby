@@ -81,7 +81,7 @@ function OrderScreen(props) {
         setSdkReady(true);
       }
     }
-  }, [orderId, successPay, success, history, successDeliver, dispatch, order]);
+  }, [orderId, successPay, success, history, successDeliver, dispatch, order, userInfo]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -94,15 +94,15 @@ function OrderScreen(props) {
   return loading ? (
     <Loader />
   ) : error ? (
-    <Message variant="danger">
+    <Message className="my-3" variant="danger">
       {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
     </Message>
   ) : (
-    <div>
+    <div className="my-3">
       <h1>Order : {order.id}</h1>
       <Row>
         <Col md={8}>
-          <ListGroup variant="flush">
+          <ListGroup variant="">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
@@ -114,12 +114,14 @@ function OrderScreen(props) {
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
-                <strong>
-                  Shipping : {"  "} {order.shippingAddress.address}, {"  "}
-                  {order.shippingAddress.city}, {"  "}
-                  {order.shippingAddress.postalCode},{"  "}
-                  {order.shippingAddress.country}
-                </strong>
+                <em>
+                  <strong>
+                    Shipping : {"  "} {order.shippingAddress.address}, {"  "}
+                    {order.shippingAddress.city}, {"  "}
+                    {order.shippingAddress.postalCode},{"  "}
+                    {order.shippingAddress.country}
+                  </strong>
+                </em>
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
@@ -166,7 +168,7 @@ function OrderScreen(props) {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} X {formatPrice(item.price)} =
+                          {item.qty} X {formatPrice(item.price)} = {"  "}
                           {formatPrice((item.qty * item.price).toFixed(2))}
                         </Col>
                       </Row>
@@ -203,17 +205,21 @@ function OrderScreen(props) {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Total Price :</Col>
-                  <Col>{formatPrice(order.totalPrice)}</Col>
+                  <Col>
+                    <strong>Total Price :</strong>
+                  </Col>
+                  <Col>
+                    <strong>{formatPrice(order.totalPrice)}</strong>
+                  </Col>
                 </Row>
               </ListGroup.Item>
-                {error && (
-                  <Message variant="danger">
-                    {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
-                  </Message>
-                )}
+              {error && (
+                <Message variant="danger">
+                  {error}! Try Reloading, If error persist, LOGIN AGAIN !!!
+                </Message>
+              )}
               {!order.isPaid && (
-                <ListGroup.Item>
+                <ListGroup.Item className="my-3">
                   {loadingPay && <Loader />}
                   {!sdkReady ? (
                     <Loader />
@@ -225,7 +231,7 @@ function OrderScreen(props) {
                   )}
                 </ListGroup.Item>
               )}
-              {loadingDeliver && <Loader/>}
+              {loadingDeliver && <Loader />}
               {userInfo &&
                 userInfo.isAdmin &&
                 order.isPaid &&
@@ -233,7 +239,7 @@ function OrderScreen(props) {
                   <ListGroup.Item>
                     <Button
                       type="button"
-                      className="btn btn-block"
+                      className="btn btn-block  my-3"
                       onClick={deliverHandler}
                     >
                       Mark As Delivered

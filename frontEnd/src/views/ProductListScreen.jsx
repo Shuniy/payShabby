@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import Loader from "../components/Loader";
@@ -73,7 +73,7 @@ function ProductListScreen(props) {
   };
 
   return (
-    <div>
+    <div className='my-3'>
       <Row className="align-items-center">
         <Col>
           <h1>Products</h1>
@@ -128,7 +128,7 @@ function ProductListScreen(props) {
                     </LinkContainer>
                     <Button
                       variant="danger"
-                      className="btn btn-sm"
+                      className="btn btn-sm mx-3"
                       onClick={() => deleteHandler(product.id)}
                     >
                       <i className="fa fa-trash"></i>

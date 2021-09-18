@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
 function PaymentScreen(props) {
-  const { location, history } = props;
+  const { history } = props;
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { shippingAddress } = cart;
@@ -27,8 +27,10 @@ function PaymentScreen(props) {
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
       <Form onSubmit={submitHandler}>
-        <Form.Group>
-          <Form.Label as="legend">Select Payment Method</Form.Label>
+        <Form.Group className="my-3">
+          <Form.Label className="my-3" as="legend">
+            Select Payment Method
+          </Form.Label>
           <Col>
             <Form.Check
               id="paypal"
@@ -40,7 +42,7 @@ function PaymentScreen(props) {
             ></Form.Check>
           </Col>
         </Form.Group>
-        <Button type="submit" variant="primary">
+        <Button className="my-3" type="submit" variant="primary">
           Continue
         </Button>
       </Form>

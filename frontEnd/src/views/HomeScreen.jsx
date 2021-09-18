@@ -24,7 +24,7 @@ function HomeScreen(props) {
   return (
     <div>
       {!keyword && <ProductCarousel />}
-      <h1>Latest Products</h1>
+      <h1 className="my-3">Latest Products</h1>
 
       {loading ? (
         <Loader />
@@ -41,7 +41,12 @@ function HomeScreen(props) {
               </Col>
             ))}
           </Row>
-          <Paginate page={page} pages={pages} keyword={keyword} />
+          <Paginate
+            className="my-3"
+            page={page}
+            pages={pages}
+            keyword={keyword}
+          />
         </div>
       )}
     </div>

@@ -22,6 +22,7 @@ function AppHeader(props) {
       variant="light"
       expand="lg"
       collapseOnSelect
+      style={{ marginBottm: 10 }}
     >
       <Container>
         <LinkContainer to="/">
@@ -31,37 +32,57 @@ function AppHeader(props) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <SearchBox />
-            <LinkContainer to="/cart">
+            <LinkContainer className="custom-nav-items mx-3 my-auto" to="/cart">
               <Nav.Link>
-                <i className="fas fa-shopping-cart"></i> Cart
+                <i className="fas fa-shopping-cart"> </i> Cart
               </Nav.Link>
             </LinkContainer>
 
             {userInfo ? (
-              <NavDropdown title={userInfo.name} id="username">
-                <LinkContainer to="/profile">
+              <NavDropdown
+                title={userInfo.name}
+                className="custom-nav-items mx-3 my-auto"
+                id="username"
+              >
+                <LinkContainer className="my-auto" to="/profile">
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>
-                <NavDropdown.Item onClick={logoutHandler}>
+                <NavDropdown.Item className="my-auto" onClick={logoutHandler}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <LinkContainer to="/login">
+              <LinkContainer
+                className="custom-nav-items mx-3 my-auto"
+                to="/login"
+              >
                 <Nav.Link>
                   <i className="fas fa-user"></i> Login
                 </Nav.Link>
               </LinkContainer>
             )}
             {userInfo && userInfo.isAdmin && (
-              <NavDropdown title={"Admin"} id="adminMenu">
-                <LinkContainer to="/admin/userlist">
+              <NavDropdown
+                title={"Admin"}
+                className="custom-nav-items mx-3 my-auto"
+                id="adminMenu"
+              >
+                <LinkContainer
+                  className="my-auto"
+                  to="/admin/userlist"
+                >
                   <NavDropdown.Item>Users</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/admin/productlist">
+                <LinkContainer
+                  className="my-auto"
+                  to="/admin/productlist"
+                >
                   <NavDropdown.Item>Products</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/admin/orderlist">
+                <LinkContainer
+                  className="my-auto"
+                  to="/admin/orderlist"
+                >
                   <NavDropdown.Item>Orders</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>

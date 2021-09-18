@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
@@ -26,7 +26,7 @@ function OrderListScreen(props) {
   }, [dispatch, history, userInfo]);
 
   return (
-    <div>
+    <div className='my-3'>
       <h1>Orders</h1>
       {loading ? (
         <Loader />
