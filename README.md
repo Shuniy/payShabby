@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Django.
 
-***`Paypal integration is added with paypal Sandbox, don't try to pay accidently for testing or anything as it might not work or worse as didn't try it.`***
+***`Paypal integration is added with paypal Sandbox and payment for testing and shipping is done with sandbox account, use your own sandbox account, don't try to pay accidently for testing or anything as it might not work or worse as didn't try it.`***
 
 ## Available Scripts
 
